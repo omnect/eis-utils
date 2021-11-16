@@ -1,0 +1,42 @@
+homedir_path = "."
+
+[cert_issuance]
+device-ca = { method = "est", common_name = "custom-name" }
+module-id = { method = "self_signed", expiry_days = 90, common_name = "custom-name"}
+module-server = { method = "local_ca" }
+
+[cert_issuance.device-id]
+method = "est"
+url = "https://estendpoint.com/.well-known/est/device-id/"
+username = "username"
+password = "password"
+identity_cert = "device-id"
+identity_pk = "device-id"
+bootstrap_identity_cert = "bootstrap"
+bootstrap_identity_pk = "bootstrap"
+expiry_days = 365
+subject = { "L" = "AQ", "ST" = "Antarctica", "CN" = "test-device" }
+
+[cert_issuance.est]
+identity_cert = "est-id"
+identity_pk = "est-id"
+bootstrap_identity_cert = "bootstrap"
+bootstrap_identity_pk = "bootstrap"
+trusted_certs = [
+	"est-ca",
+]
+
+[cert_issuance.est.urls]
+default = "https://estendpoint.com/.well-known/est/"
+device-ca = "https://estendpoint.com/.well-known/est/device-ca/"
+
+[preloaded_certs]
+bootstrap = "file:///var/secrets/bootstrap.cer"
+est-ca = "file:///var/secrets/est-ca.cer"
+trust-bundle = [
+	"est-ca",
+]
+
+[[principal]]
+uid = 1000
+certs = ["test"]

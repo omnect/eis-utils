@@ -1,0 +1,42 @@
+[package]
+name = "eis-utils"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+hyper = "0.14"
+tokio = { version = "1", features = ["full", "rt-multi-thread"] }
+hyper-timeout = "0.4"
+chrono = "0.4.19"
+percent-encoding = "2.1.0"
+base64 = "0.13.0"
+url = "2.2.2"
+log = "0.4"
+http-common = { path = "iot-identity-service/http-common" }
+aziot-identity-client-async = { path = "iot-identity-service/identity/aziot-identity-client-async" }
+aziot-identity-common = { path = "iot-identity-service/identity/aziot-identity-common" }
+aziot-identityd-config = { path = "iot-identity-service/identity/aziot-identityd-config" }
+aziot-identity-common-http = { path = "iot-identity-service/identity/aziot-identity-common-http" }
+aziot-keyd-config = { path = "iot-identity-service/key/aziot-keyd-config" }
+aziot-key-client-async = { path = "iot-identity-service/key/aziot-key-client-async" }
+aziot-key-common = { path = "iot-identity-service/key/aziot-key-common" }
+aziot-key-common-http = { path = "iot-identity-service/key/aziot-key-common-http" }
+aziot-cert-client-async = { path = "iot-identity-service/cert/aziot-cert-client-async" }
+aziot-cert-common = { path = "iot-identity-service/cert/aziot-cert-common" }
+aziot-certd-config = { path = "iot-identity-service/cert/aziot-certd-config" }
+aziot-cert-common-http = { path = "iot-identity-service/cert/aziot-cert-common-http" }
+env_logger = "0.8"
+
+[dev-dependencies]
+async-trait = "0.1"
+serde = { version = "1", features = ["derive"] }
+http = "0.2"
+futures-util = "0.3"
+serde_json = "1"
+config-common = { path = "iot-identity-service/config-common" }
+toml = "0.5"
+tokio-test = "*"
+lazy_static = "1.4.0"
+regex = "*"
