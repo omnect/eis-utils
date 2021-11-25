@@ -452,7 +452,7 @@ fn check_request_connection_string_from_eis_with_expiry_with_sas_token() {
         eis_utils::request_connection_string_from_eis_with_expiry(expire).expect("Success");
     assert!(result.auth_type == eis_utils::AuthType::SASToken);
     assert!(result.conn_type == eis_utils::ConnType::Device);
-    assert_eq!(result.connection_string, format!("HostName=Somehub;DeviceId=SomeDeviceId;SharedAccessSignature sr=somehub/devices/somedeviceid&sig=AQIDBAUGBwg%3D&se={}", expire.as_secs()));
+    assert_eq!(result.connection_string, format!("HostName=Somehub;DeviceId=SomeDeviceId;SharedAccessSignature=SharedAccessSignature sr=somehub/devices/somedeviceid&sig=AQIDBAUGBwg%3D&se={}", expire.as_secs()));
     assert_eq!(result.certificate_string.len(), 0);
     assert_eq!(result.openssl_engine.len(), 0);
     assert_eq!(result.openssl_private_key.len(), 0);
@@ -532,7 +532,7 @@ fn check_request_connection_string_from_eis_with_expiry_with_sas_token_and_mod()
         eis_utils::request_connection_string_from_eis_with_expiry(expire).expect("Success");
     assert!(result.auth_type == eis_utils::AuthType::SASToken);
     assert!(result.conn_type == eis_utils::ConnType::Module);
-    assert_eq!(result.connection_string, format!("HostName=Somehub;DeviceId=SomeDeviceId;ModuleId=SomeModuleId;SharedAccessSignature sr=somehub/devices/somedeviceid/modules/somemoduleid&sig=AQIDBAUGBwg%3D&se={}", expire.as_secs()));
+    assert_eq!(result.connection_string, format!("HostName=Somehub;DeviceId=SomeDeviceId;ModuleId=SomeModuleId;SharedAccessSignature=SharedAccessSignature sr=somehub/devices/somedeviceid/modules/somemoduleid&sig=AQIDBAUGBwg%3D&se={}", expire.as_secs()));
     assert_eq!(result.certificate_string.len(), 0);
     assert_eq!(result.openssl_engine.len(), 0);
     assert_eq!(result.openssl_private_key.len(), 0);

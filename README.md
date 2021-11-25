@@ -12,7 +12,7 @@ git submodule init
 Please create a directory /run/aziot and give the user running this test rwx permissions to this directory:
 
 ```
-sudo mkdir -p /run/aziot && isudo chown `whoami` /run/aziot
+sudo mkdir -p /run/aziot && sudo chown `whoami` /run/aziot
 ```
 
 Also since the tests need to switch services in between test cases, run the tests sequentially:
