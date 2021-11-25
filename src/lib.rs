@@ -105,7 +105,10 @@ pub fn request_connection_string_from_eis_with_expiry(
             let signature = build_sas(resource_uri, key, expiry_since_epoch)?;
             debug!("SAS token: {:?}", signature);
 
-            connection_string = format!("{}SharedAccessSignature {}", connection_string, signature);
+            connection_string = format!(
+                "{}SharedAccessSignature=SharedAccessSignature {}",
+                connection_string, signature
+            );
             connection_info.connection_string = connection_string;
             connection_info.auth_type = AuthType::SASToken;
         }
