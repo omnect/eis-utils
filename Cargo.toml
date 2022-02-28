@@ -1,7 +1,7 @@
 [package]
 name = "eis-utils"
-version = "0.2.0"
-edition = "2018"
+version = "0.2.1"
+edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -14,19 +14,19 @@ percent-encoding = "2.1.0"
 base64 = "0.13.0"
 url = "2.2.2"
 log = "0.4"
-http-common = { path = "iot-identity-service/http-common" }
-aziot-identity-client-async = { path = "iot-identity-service/identity/aziot-identity-client-async" }
-aziot-identity-common = { path = "iot-identity-service/identity/aziot-identity-common" }
-aziot-identityd-config = { path = "iot-identity-service/identity/aziot-identityd-config" }
-aziot-identity-common-http = { path = "iot-identity-service/identity/aziot-identity-common-http" }
-aziot-keyd-config = { path = "iot-identity-service/key/aziot-keyd-config" }
-aziot-key-client-async = { path = "iot-identity-service/key/aziot-key-client-async" }
-aziot-key-common = { path = "iot-identity-service/key/aziot-key-common" }
-aziot-key-common-http = { path = "iot-identity-service/key/aziot-key-common-http" }
-aziot-cert-client-async = { path = "iot-identity-service/cert/aziot-cert-client-async" }
-aziot-cert-common = { path = "iot-identity-service/cert/aziot-cert-common" }
-aziot-certd-config = { path = "iot-identity-service/cert/aziot-certd-config" }
-aziot-cert-common-http = { path = "iot-identity-service/cert/aziot-cert-common-http" }
+http-common = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "http-common", branch = "main" }
+aziot-identity-client-async = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-identity-client-async", branch = "main" }
+aziot-identity-common = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-identity-common", branch = "main" }
+aziot-identityd-config = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-identityd-config", branch = "main" }
+aziot-identity-common-http = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-identity-common-http", branch = "main" }
+aziot-keyd-config = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-keyd-config", branch = "main" }
+aziot-key-client-async = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-key-client-async", branch = "main" }
+aziot-key-common = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-key-common", branch = "main" }
+aziot-key-common-http = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-key-common-http", branch = "main" }
+aziot-cert-client-async = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-cert-client-async", branch = "main" }
+aziot-cert-common = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-cert-common", branch = "main" }
+aziot-certd-config = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-certd-config", branch = "main" }
+aziot-cert-common-http = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-cert-common-http", branch = "main" }
 env_logger = "0.8"
 
 [dev-dependencies]
