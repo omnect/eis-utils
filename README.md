@@ -1,5 +1,5 @@
 # ics-dm-eisutils-rs
-Implementation of eis_utils in pure Rust
+Implementation of eis_utils in pure Rust.
 
 This crate relies heavily on the functionality already provided by [the iot-identity-services](https://github.com/Azure/iot-identity-service).
 

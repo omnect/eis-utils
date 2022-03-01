@@ -263,7 +263,7 @@ async fn start_identity_service(
     mock_identity: aziot_identity_common::Identity,
 ) -> Result<IdentityService, std::io::Error> {
     log::debug!("Starting identity service...");
-    let config_path: std::path::PathBuf = "identity-config.toml".into();
+    let config_path: std::path::PathBuf = "tests/identity-config.toml".into();
     let config: toml::Value = match config_common::read_config(&config_path, None) {
         Err(e) => {
             return Err(std::io::Error::new(
@@ -315,7 +315,7 @@ async fn start_identity_service(
 
 async fn start_key_service() -> Result<(), std::io::Error> {
     log::debug!("Starting key service...");
-    let config_path: std::path::PathBuf = "key-config.toml".into();
+    let config_path: std::path::PathBuf = "tests/key-config.toml".into();
     let config: toml::Value = match config_common::read_config(&config_path, None) {
         Err(e) => {
             return Err(std::io::Error::new(
@@ -369,7 +369,7 @@ async fn start_key_service() -> Result<(), std::io::Error> {
 
 async fn start_cert_service() -> Result<(), std::io::Error> {
     log::debug!("Starting cert service...");
-    let config_path: std::path::PathBuf = "cert-config.toml".into();
+    let config_path: std::path::PathBuf = "tests/cert-config.toml".into();
     let config: toml::Value = match config_common::read_config(&config_path, None) {
         Err(e) => {
             return Err(std::io::Error::new(
