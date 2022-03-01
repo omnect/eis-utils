@@ -14,19 +14,19 @@ percent-encoding = "2.1.0"
 base64 = "0.13.0"
 url = "2.2.2"
 log = "0.4"
-http-common = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "http-common", branch = "main" }
-aziot-identity-client-async = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-identity-client-async", branch = "main" }
-aziot-identity-common = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-identity-common", branch = "main" }
-aziot-identityd-config = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-identityd-config", branch = "main" }
-aziot-identity-common-http = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-identity-common-http", branch = "main" }
-aziot-keyd-config = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-keyd-config", branch = "main" }
-aziot-key-client-async = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-key-client-async", branch = "main" }
-aziot-key-common = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-key-common", branch = "main" }
-aziot-key-common-http = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-key-common-http", branch = "main" }
-aziot-cert-client-async = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-cert-client-async", branch = "main" }
-aziot-cert-common = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-cert-common", branch = "main" }
-aziot-certd-config = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-certd-config", branch = "main" }
-aziot-cert-common-http = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-cert-common-http", branch = "main" }
+http-common = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "http-common", rev = "6af42eefc84351ec7af510213561a40948ed9045" }
+aziot-identity-client-async = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-identity-client-async", rev = "6af42eefc84351ec7af510213561a40948ed9045" }
+aziot-identity-common = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-identity-common", rev = "6af42eefc84351ec7af510213561a40948ed9045" }
+aziot-identityd-config = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-identityd-config", rev = "6af42eefc84351ec7af510213561a40948ed9045" }
+aziot-identity-common-http = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-identity-common-http", rev = "6af42eefc84351ec7af510213561a40948ed9045" }
+aziot-keyd-config = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-keyd-config", rev = "6af42eefc84351ec7af510213561a40948ed9045" }
+aziot-key-client-async = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-key-client-async", rev = "6af42eefc84351ec7af510213561a40948ed9045" }
+aziot-key-common = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-key-common", rev = "6af42eefc84351ec7af510213561a40948ed9045" }
+aziot-key-common-http = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-key-common-http", rev = "6af42eefc84351ec7af510213561a40948ed9045" }
+aziot-cert-client-async = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-cert-client-async", rev = "6af42eefc84351ec7af510213561a40948ed9045" }
+aziot-cert-common = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-cert-common", rev = "6af42eefc84351ec7af510213561a40948ed9045" }
+aziot-certd-config = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-certd-config", rev = "6af42eefc84351ec7af510213561a40948ed9045" }
+aziot-cert-common-http = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "aziot-cert-common-http", rev = "6af42eefc84351ec7af510213561a40948ed9045" }
 env_logger = "0.8"
 
 [dev-dependencies]
@@ -35,7 +35,7 @@ serde = { version = "1", features = ["derive"] }
 http = "0.2"
 futures-util = "0.3"
 serde_json = "1"
-config-common = { path = "iot-identity-service/config-common" }
+config-common = { git = "ssh://git@github.com/Azure/iot-identity-service.git", package = "config-common", rev = "6af42eefc84351ec7af510213561a40948ed9045" }
 toml = "0.5"
 tokio-test = "*"
 lazy_static = "1.4.0"
