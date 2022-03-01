@@ -1,3 +1,0 @@
-[submodule "iot-identity-service"]
-	path = iot-identity-service
-	url = https://github.com/Azure/iot-identity-service.git
