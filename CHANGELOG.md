@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.1] Q1 2022
 
-remove submodules and bump to current main
+remove submodules and bump to current main rev
 
 ## [0.2.0] Q1 2022
 
