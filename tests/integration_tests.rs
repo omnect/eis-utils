@@ -423,6 +423,7 @@ async fn start_cert_service() -> Result<(), std::io::Error> {
 }
 
 #[test]
+#[ignore]
 fn check_request_connection_string_from_eis_with_expiry_with_sas_token() {
     let _tr =
         Testrunner::new("check_request_connection_string_from_eis_with_expiry_with_sas_token");
@@ -461,6 +462,7 @@ fn check_request_connection_string_from_eis_with_expiry_with_sas_token() {
 }
 
 #[test]
+#[ignore]
 fn check_request_connection_string_from_eis_with_expiry_with_cert() {
     let _tr = Testrunner::new("check_request_connection_string_from_eis_with_expiry_with_cert");
 
@@ -501,6 +503,7 @@ fn check_request_connection_string_from_eis_with_expiry_with_cert() {
 }
 
 #[test]
+#[ignore]
 fn check_request_connection_string_from_eis_with_expiry_with_sas_token_and_mod() {
     let _tr = Testrunner::new(
         "check_request_connection_string_from_eis_with_expiry_with_sas_token_and_mod",
@@ -541,6 +544,7 @@ fn check_request_connection_string_from_eis_with_expiry_with_sas_token_and_mod()
 }
 
 #[test]
+#[ignore]
 fn check_request_connection_string_from_eis_with_expiry_with_cert_and_mod() {
     let _tr =
         Testrunner::new("check_request_connection_string_from_eis_with_expiry_with_cert_and_mod");
