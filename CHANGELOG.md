@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.2] Q1 2022
 
-- fix cargo audi warnings by updating/removing dependencies
+- fix cargo audit warnings by updating/removing dependencies
 - disabled failing integration tests
 
 ## [0.2.1] Q1 2022
