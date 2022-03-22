@@ -1,6 +1,6 @@
 [package]
 name = "eis-utils"
-version = "0.2.1"
+version = "0.2.2"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -9,7 +9,6 @@ edition = "2021"
 hyper = "0.14"
 tokio = { version = "1", features = ["full", "rt-multi-thread"] }
 hyper-timeout = "0.4"
-chrono = "0.4.19"
 percent-encoding = "2.1.0"
 base64 = "0.13.0"
 url = "2.2.2"
@@ -39,4 +38,4 @@ config-common = { git = "https://git@github.com/Azure/iot-identity-service.git",
 toml = "0.5"
 tokio-test = "*"
 lazy_static = "1.4.0"
-regex = "*"
+regex = "1.5.5"
