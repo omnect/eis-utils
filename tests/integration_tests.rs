@@ -258,6 +258,7 @@ impl http_common::server::Route for CertRoute {
 }
 
 const SOCKET_DEFAULT_PERMISSION: u32 = 0o660;
+const MAX_REQUESTS: usize = 3;
 
 async fn start_identity_service(
     mock_identity: aziot_identity_common::Identity,
@@ -289,7 +290,7 @@ async fn start_identity_service(
 
     log::debug!("Starting identity server...");
 
-    let mut incoming = match connector.incoming(SOCKET_DEFAULT_PERMISSION, None).await {
+    let mut incoming = match connector.incoming(SOCKET_DEFAULT_PERMISSION, MAX_REQUESTS, None).await {
         Err(e) => {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::Other,
@@ -343,7 +344,7 @@ async fn start_key_service() -> Result<(), std::io::Error> {
 
     log::debug!("Starting key server...");
 
-    let mut incoming = match connector.incoming(SOCKET_DEFAULT_PERMISSION, None).await {
+    let mut incoming = match connector.incoming(SOCKET_DEFAULT_PERMISSION, MAX_REQUESTS, None).await {
         Err(e) => {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::Other,
@@ -398,7 +399,7 @@ async fn start_cert_service() -> Result<(), std::io::Error> {
 
     log::debug!("Starting cert server...");
 
-    let mut incoming = match connector.incoming(SOCKET_DEFAULT_PERMISSION, None).await {
+    let mut incoming = match connector.incoming(SOCKET_DEFAULT_PERMISSION, MAX_REQUESTS, None).await {
         Err(e) => {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::Other,
