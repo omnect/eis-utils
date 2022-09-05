@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.3] Q1 2022
 
-- update to iot-identity-servie 1.3.0
+- update to iot-identity-servie 1.4.0
 
 ## [0.2.2] Q1 2022
 
