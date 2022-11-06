@@ -1,7 +1,7 @@
 #[macro_use]
 extern crate lazy_static;
 use env_logger::{Builder, Env};
-use http_common::{self, Incoming};
+use http_common::Incoming;
 
 lazy_static! {
     static ref LOG: () = if cfg!(debug_assertions) {
@@ -289,7 +289,14 @@ async fn start_identity_service(
 
     log::debug!("Starting identity server...");
 
-    let mut incoming = match connector.incoming(SOCKET_DEFAULT_PERMISSION, Incoming::default_max_requests(), None).await {
+    let mut incoming = match connector
+        .incoming(
+            SOCKET_DEFAULT_PERMISSION,
+            Incoming::default_max_requests(),
+            None,
+        )
+        .await
+    {
         Err(e) => {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::Other,
@@ -343,7 +350,14 @@ async fn start_key_service() -> Result<(), std::io::Error> {
 
     log::debug!("Starting key server...");
 
-    let mut incoming = match connector.incoming(SOCKET_DEFAULT_PERMISSION, Incoming::default_max_requests(), None).await {
+    let mut incoming = match connector
+        .incoming(
+            SOCKET_DEFAULT_PERMISSION,
+            Incoming::default_max_requests(),
+            None,
+        )
+        .await
+    {
         Err(e) => {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::Other,
@@ -398,7 +412,14 @@ async fn start_cert_service() -> Result<(), std::io::Error> {
 
     log::debug!("Starting cert server...");
 
-    let mut incoming = match connector.incoming(SOCKET_DEFAULT_PERMISSION, Incoming::default_max_requests(), None).await {
+    let mut incoming = match connector
+        .incoming(
+            SOCKET_DEFAULT_PERMISSION,
+            Incoming::default_max_requests(),
+            None,
+        )
+        .await
+    {
         Err(e) => {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::Other,
