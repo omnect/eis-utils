@@ -451,17 +451,17 @@ fn check_request_connection_string_from_eis_with_expiry_with_sas_token() {
 
     log::debug!("test starting");
     let rt = tokio::runtime::Runtime::new().unwrap();
-    let _join_handle = rt.block_on(async {
+    rt.block_on(async {
         let _identity_handle = tokio::task::spawn(start_identity_service((*IDENTITY_SAS).clone()));
         log::debug!("started identity service");
     });
     let rt2 = tokio::runtime::Runtime::new().unwrap();
-    let _join_handle2 = rt2.block_on(async {
+    rt2.block_on(async {
         let _key_handle = tokio::task::spawn(start_key_service());
         log::debug!("started key service");
     });
     let rt3 = tokio::runtime::Runtime::new().unwrap();
-    let _join_handle3 = rt3.block_on(async {
+    rt3.block_on(async {
         let _cert_handle = tokio::task::spawn(start_cert_service());
         log::debug!("started cert service");
     });
@@ -489,17 +489,17 @@ fn check_request_connection_string_from_eis_with_expiry_with_cert() {
 
     log::debug!("test starting");
     let rt = tokio::runtime::Runtime::new().unwrap();
-    let _join_handle = rt.block_on(async {
+    rt.block_on(async {
         let _identity_handle = tokio::task::spawn(start_identity_service((*IDENTITY_CERT).clone()));
         log::debug!("started identity service");
     });
     let rt2 = tokio::runtime::Runtime::new().unwrap();
-    let _join_handle2 = rt2.block_on(async {
+    rt2.block_on(async {
         let _key_handle = tokio::task::spawn(start_key_service());
         log::debug!("started key service");
     });
     let rt3 = tokio::runtime::Runtime::new().unwrap();
-    let _join_handle3 = rt3.block_on(async {
+    rt3.block_on(async {
         let _cert_handle = tokio::task::spawn(start_cert_service());
         log::debug!("started cert service");
     });
@@ -532,18 +532,18 @@ fn check_request_connection_string_from_eis_with_expiry_with_sas_token_and_mod()
 
     log::debug!("test starting");
     let rt = tokio::runtime::Runtime::new().unwrap();
-    let _join_handle = rt.block_on(async {
+    rt.block_on(async {
         let _identity_handle =
             tokio::task::spawn(start_identity_service((*IDENTITY_SAS_MOD).clone()));
         log::debug!("started identity service");
     });
     let rt2 = tokio::runtime::Runtime::new().unwrap();
-    let _join_handle2 = rt2.block_on(async {
+    rt2.block_on(async {
         let _key_handle = tokio::task::spawn(start_key_service());
         log::debug!("started key service");
     });
     let rt3 = tokio::runtime::Runtime::new().unwrap();
-    let _join_handle3 = rt3.block_on(async {
+    rt3.block_on(async {
         let _cert_handle = tokio::task::spawn(start_cert_service());
         log::debug!("started cert service");
     });
@@ -572,18 +572,18 @@ fn check_request_connection_string_from_eis_with_expiry_with_cert_and_mod() {
 
     log::debug!("test starting");
     let rt = tokio::runtime::Runtime::new().unwrap();
-    let _join_handle = rt.block_on(async {
+    rt.block_on(async {
         let _identity_handle =
             tokio::task::spawn(start_identity_service((*IDENTITY_CERT_MOD).clone()));
         log::debug!("started identity service");
     });
     let rt2 = tokio::runtime::Runtime::new().unwrap();
-    let _join_handle2 = rt2.block_on(async {
+    rt2.block_on(async {
         let _key_handle = tokio::task::spawn(start_key_service());
         log::debug!("started key service");
     });
     let rt3 = tokio::runtime::Runtime::new().unwrap();
-    let _join_handle3 = rt3.block_on(async {
+    rt3.block_on(async {
         let _cert_handle = tokio::task::spawn(start_cert_service());
         log::debug!("started cert service");
     });

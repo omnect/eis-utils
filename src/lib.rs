@@ -40,7 +40,7 @@ pub fn request_connection_string_from_eis_with_expiry(
     {
         return Err(std::io::Error::new(
             std::io::ErrorKind::Other,
-            format!("Invalid expiry, needs to be in the future."),
+            "Invalid expiry, needs to be in the future.".to_string(),
         ));
     }
     let mut connection_info = ConnectionInfo {
@@ -85,7 +85,7 @@ pub fn request_connection_string_from_eis_with_expiry(
         _ => {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::Other,
-                format!("Missing auth."),
+                "Missing auth.".to_string(),
             ));
         }
     };
@@ -94,7 +94,7 @@ pub fn request_connection_string_from_eis_with_expiry(
         _ => {
             return Err(std::io::Error::new(
                 std::io::ErrorKind::Other,
-                format!("Missing auth key handle."),
+                "Missing auth key handle.".to_string(),
             ));
         }
     };
@@ -118,7 +118,7 @@ pub fn request_connection_string_from_eis_with_expiry(
                 _ => {
                     return Err(std::io::Error::new(
                         std::io::ErrorKind::Other,
-                        format!("Missing auth cert id."),
+                        "Missing auth cert id.".to_string(),
                     ));
                 }
             };
@@ -130,7 +130,7 @@ pub fn request_connection_string_from_eis_with_expiry(
             connection_info.connection_string = connection_string;
             connection_info.auth_type = AuthType::SASCert;
             connection_info.openssl_private_key = key.0;
-            if 0 != connection_info.certificate_string.len() {
+            if !connection_info.certificate_string.is_empty() {
                 connection_info.openssl_engine = "aziot_keys".to_string();
             }
         }
