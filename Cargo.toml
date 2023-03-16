@@ -2,6 +2,10 @@
 name = "eis-utils"
 version = "0.2.6"
 edition = "2021"
+authors = ["omnect@conplement.de>"]
+repository = "https://github.com/omnect/eis-utils"
+description = "Basic wrapper around azure identity service."
+license = "MIT OR Apache-2.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
