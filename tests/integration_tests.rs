@@ -443,35 +443,33 @@ async fn start_cert_service() -> Result<(), std::io::Error> {
     Ok(())
 }
 
-#[test]
+#[tokio::test]
 #[ignore]
-fn check_request_connection_string_from_eis_with_expiry_with_sas_token() {
+async fn check_request_connection_string_from_eis_with_expiry_with_sas_token() {
     let _tr =
         Testrunner::new("check_request_connection_string_from_eis_with_expiry_with_sas_token");
 
     log::debug!("test starting");
-    let rt = tokio::runtime::Runtime::new().unwrap();
-    rt.block_on(async {
-        let _identity_handle = tokio::task::spawn(start_identity_service((*IDENTITY_SAS).clone()));
-        log::debug!("started identity service");
-    });
-    let rt2 = tokio::runtime::Runtime::new().unwrap();
-    rt2.block_on(async {
-        let _key_handle = tokio::task::spawn(start_key_service());
-        log::debug!("started key service");
-    });
-    let rt3 = tokio::runtime::Runtime::new().unwrap();
-    rt3.block_on(async {
-        let _cert_handle = tokio::task::spawn(start_cert_service());
-        log::debug!("started cert service");
-    });
+
+    start_identity_service((*IDENTITY_SAS).clone())
+        .await
+        .unwrap();
+    log::debug!("started identity service");
+
+    start_key_service().await.unwrap();
+    log::debug!("started key service");
+
+    start_cert_service().await.unwrap();
+    log::debug!("started cert service");
+
     let expire = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .unwrap()
         + std::time::Duration::new(60, 0);
     std::thread::sleep(std::time::Duration::from_millis(2000));
-    let result =
-        eis_utils::request_connection_string_from_eis_with_expiry(expire).expect("Success");
+    let result = eis_utils::request_connection_string_from_eis_with_expiry(expire)
+        .await
+        .expect("Success");
     assert!(result.auth_type == eis_utils::AuthType::SASToken);
     assert!(result.conn_type == eis_utils::ConnType::Device);
     assert_eq!(result.connection_string, format!("HostName=Somehub;DeviceId=SomeDeviceId;SharedAccessSignature=SharedAccessSignature sr=somehub/devices/somedeviceid&sig=AQIDBAUGBwg%3D&se={}", expire.as_secs()));
@@ -482,34 +480,32 @@ fn check_request_connection_string_from_eis_with_expiry_with_sas_token() {
     log::info!("{:?}", result);
 }
 
-#[test]
+#[tokio::test]
 #[ignore]
-fn check_request_connection_string_from_eis_with_expiry_with_cert() {
+async fn check_request_connection_string_from_eis_with_expiry_with_cert() {
     let _tr = Testrunner::new("check_request_connection_string_from_eis_with_expiry_with_cert");
 
     log::debug!("test starting");
-    let rt = tokio::runtime::Runtime::new().unwrap();
-    rt.block_on(async {
-        let _identity_handle = tokio::task::spawn(start_identity_service((*IDENTITY_CERT).clone()));
-        log::debug!("started identity service");
-    });
-    let rt2 = tokio::runtime::Runtime::new().unwrap();
-    rt2.block_on(async {
-        let _key_handle = tokio::task::spawn(start_key_service());
-        log::debug!("started key service");
-    });
-    let rt3 = tokio::runtime::Runtime::new().unwrap();
-    rt3.block_on(async {
-        let _cert_handle = tokio::task::spawn(start_cert_service());
-        log::debug!("started cert service");
-    });
+
+    start_identity_service((*IDENTITY_CERT).clone())
+        .await
+        .unwrap();
+    log::debug!("started identity service");
+
+    start_key_service().await.unwrap();
+    log::debug!("started key service");
+
+    start_cert_service().await.unwrap();
+    log::debug!("started cert service");
+
     let expire = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .unwrap()
         + std::time::Duration::new(60, 0);
     std::thread::sleep(std::time::Duration::from_millis(2000));
-    let result =
-        eis_utils::request_connection_string_from_eis_with_expiry(expire).expect("Success");
+    let result = eis_utils::request_connection_string_from_eis_with_expiry(expire)
+        .await
+        .expect("Success");
     assert!(result.auth_type == eis_utils::AuthType::SASCert);
     assert!(result.conn_type == eis_utils::ConnType::Device);
     assert_eq!(
@@ -523,37 +519,34 @@ fn check_request_connection_string_from_eis_with_expiry_with_cert() {
     log::info!("{:?}", result);
 }
 
-#[test]
+#[tokio::test]
 #[ignore]
-fn check_request_connection_string_from_eis_with_expiry_with_sas_token_and_mod() {
+async fn check_request_connection_string_from_eis_with_expiry_with_sas_token_and_mod() {
     let _tr = Testrunner::new(
         "check_request_connection_string_from_eis_with_expiry_with_sas_token_and_mod",
     );
 
     log::debug!("test starting");
-    let rt = tokio::runtime::Runtime::new().unwrap();
-    rt.block_on(async {
-        let _identity_handle =
-            tokio::task::spawn(start_identity_service((*IDENTITY_SAS_MOD).clone()));
-        log::debug!("started identity service");
-    });
-    let rt2 = tokio::runtime::Runtime::new().unwrap();
-    rt2.block_on(async {
-        let _key_handle = tokio::task::spawn(start_key_service());
-        log::debug!("started key service");
-    });
-    let rt3 = tokio::runtime::Runtime::new().unwrap();
-    rt3.block_on(async {
-        let _cert_handle = tokio::task::spawn(start_cert_service());
-        log::debug!("started cert service");
-    });
+
+    start_identity_service((*IDENTITY_SAS_MOD).clone())
+        .await
+        .unwrap();
+    log::debug!("started identity service");
+
+    start_key_service().await.unwrap();
+    log::debug!("started key service");
+
+    start_cert_service().await.unwrap();
+    log::debug!("started cert service");
+
     let expire = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .unwrap()
         + std::time::Duration::new(60, 0);
     std::thread::sleep(std::time::Duration::from_millis(2000));
-    let result =
-        eis_utils::request_connection_string_from_eis_with_expiry(expire).expect("Success");
+    let result = eis_utils::request_connection_string_from_eis_with_expiry(expire)
+        .await
+        .expect("Success");
     assert!(result.auth_type == eis_utils::AuthType::SASToken);
     assert!(result.conn_type == eis_utils::ConnType::Module);
     assert_eq!(result.connection_string, format!("HostName=Somehub;DeviceId=SomeDeviceId;ModuleId=SomeModuleId;SharedAccessSignature=SharedAccessSignature sr=somehub/devices/somedeviceid/modules/somemoduleid&sig=AQIDBAUGBwg%3D&se={}", expire.as_secs()));
@@ -564,36 +557,32 @@ fn check_request_connection_string_from_eis_with_expiry_with_sas_token_and_mod()
     log::info!("{:?}", result);
 }
 
-#[test]
+#[tokio::test]
 #[ignore]
-fn check_request_connection_string_from_eis_with_expiry_with_cert_and_mod() {
+async fn check_request_connection_string_from_eis_with_expiry_with_cert_and_mod() {
     let _tr =
         Testrunner::new("check_request_connection_string_from_eis_with_expiry_with_cert_and_mod");
 
     log::debug!("test starting");
-    let rt = tokio::runtime::Runtime::new().unwrap();
-    rt.block_on(async {
-        let _identity_handle =
-            tokio::task::spawn(start_identity_service((*IDENTITY_CERT_MOD).clone()));
-        log::debug!("started identity service");
-    });
-    let rt2 = tokio::runtime::Runtime::new().unwrap();
-    rt2.block_on(async {
-        let _key_handle = tokio::task::spawn(start_key_service());
-        log::debug!("started key service");
-    });
-    let rt3 = tokio::runtime::Runtime::new().unwrap();
-    rt3.block_on(async {
-        let _cert_handle = tokio::task::spawn(start_cert_service());
-        log::debug!("started cert service");
-    });
+    start_identity_service((*IDENTITY_CERT_MOD).clone())
+        .await
+        .unwrap();
+    log::debug!("started identity service");
+
+    start_key_service().await.unwrap();
+    log::debug!("started key service");
+
+    start_cert_service().await.unwrap();
+    log::debug!("started cert service");
+
     let expire = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .unwrap()
         + std::time::Duration::new(60, 0);
     std::thread::sleep(std::time::Duration::from_millis(2000));
-    let result =
-        eis_utils::request_connection_string_from_eis_with_expiry(expire).expect("Success");
+    let result = eis_utils::request_connection_string_from_eis_with_expiry(expire)
+        .await
+        .expect("Success");
     assert!(result.auth_type == eis_utils::AuthType::SASCert);
     assert!(result.conn_type == eis_utils::ConnType::Module);
     assert_eq!(
