@@ -1,4 +1,4 @@
-# omnect-eisutils
+# omnect eis-utils
 Product page: https://www.omnect.io/home
 
 Implementation of eis_utils in pure Rust.

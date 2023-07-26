@@ -30,7 +30,7 @@ pub struct ConnectionInfo {
 const IOTHUB_ENCODE_SET: &percent_encoding::AsciiSet =
     &http_common::PATH_SEGMENT_ENCODE_SET.add(b'=');
 
-pub fn request_connection_string_from_eis_with_expiry(
+pub async fn request_connection_string_from_eis_with_expiry(
     expiry_since_epoch: Duration,
 ) -> Result<ConnectionInfo, std::io::Error> {
     if expiry_since_epoch
@@ -53,7 +53,7 @@ pub fn request_connection_string_from_eis_with_expiry(
     };
 
     debug!("Fetching identity.");
-    let identity = get_identity()?;
+    let identity = get_identity().await?;
     debug!("Identity: {:?}", identity);
 
     let spec = match identity {
@@ -102,7 +102,7 @@ pub fn request_connection_string_from_eis_with_expiry(
     match auth.auth_type {
         aziot_identity_common::AuthenticationType::Sas => {
             debug!("Building SAS token.");
-            let signature = build_sas(resource_uri, key, expiry_since_epoch)?;
+            let signature = build_sas(resource_uri, key, expiry_since_epoch).await?;
             debug!("SAS token: {:?}", signature);
 
             connection_string = format!(
@@ -123,7 +123,7 @@ pub fn request_connection_string_from_eis_with_expiry(
                 }
             };
             debug!("Fetching certificate.");
-            let cert = get_certificate(&cert_id)?;
+            let cert = get_certificate(&cert_id).await?;
             debug!("Got certificate {:?}", cert);
             connection_info.certificate_string = cert;
             connection_string += "x509=true";
@@ -145,7 +145,6 @@ pub fn request_connection_string_from_eis_with_expiry(
 }
 
 // SAS token generation from iot-identity-service/iotedged/src/main.rs
-#[tokio::main]
 async fn build_sas(
     resource_uri: String,
     key_handle: aziot_key_common::KeyHandle,
@@ -187,7 +186,6 @@ async fn build_sas(
     Ok(token)
 }
 
-#[tokio::main]
 async fn get_identity() -> Result<aziot_identity_common::Identity, std::io::Error> {
     let connector = aziot_identityd_config::Endpoints::default().aziot_identityd;
     let client = aziot_identity_client_async::Client::new(
@@ -198,7 +196,6 @@ async fn get_identity() -> Result<aziot_identity_common::Identity, std::io::Erro
     client.get_caller_identity().await
 }
 
-#[tokio::main]
 async fn get_certificate(cert_id: &str) -> Result<Vec<u8>, std::io::Error> {
     let connector = aziot_certd_config::Endpoints::default().aziot_certd;
     let client = aziot_cert_client_async::Client::new(

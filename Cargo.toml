@@ -1,6 +1,6 @@
 [package]
 name = "eis-utils"
-version = "0.2.6"
+version = "0.3.0"
 edition = "2021"
 authors = ["omnect@conplement.de>"]
 repository = "https://github.com/omnect/eis-utils"
@@ -40,6 +40,5 @@ futures-util = "0.3"
 serde_json = "1"
 config-common = { git = "https://git@github.com/Azure/iot-identity-service.git", package = "config-common", tag = "1.4.1" }
 toml = "0.5"
-tokio-test = "*"
 lazy_static = "1.4"
 regex = "1.5"
