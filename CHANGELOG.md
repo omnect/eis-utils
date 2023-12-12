@@ -5,11 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.3.2] Q3 2023
+## [0.3.2] Q4 2023
 - updated dependency iot-identity-service to 1.4.7
 - removed user handle from dependency links
 
-## [0.3.1] Q3 2023
+## [0.3.1] Q4 2023
 - removed cargo ignore for RUSTSEC-2020-0071
 
 ## [0.3.0] Q3 2023
