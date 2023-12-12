@@ -10,21 +10,21 @@ license = "MIT OR Apache-2.0"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-aziot-cert-client-async = { git = "https://git@github.com/Azure/iot-identity-service.git", package = "aziot-cert-client-async", tag = "1.4.1" }
-aziot-cert-common = { git = "https://git@github.com/Azure/iot-identity-service.git", package = "aziot-cert-common", tag = "1.4.1" }
-aziot-certd-config = { git = "https://git@github.com/Azure/iot-identity-service.git", package = "aziot-certd-config", tag = "1.4.1" }
-aziot-cert-common-http = { git = "https://git@github.com/Azure/iot-identity-service.git", package = "aziot-cert-common-http", tag = "1.4.1" }
-aziot-identity-client-async = { git = "https://git@github.com/Azure/iot-identity-service.git", package = "aziot-identity-client-async", tag = "1.4.1" }
-aziot-identity-common = { git = "https://git@github.com/Azure/iot-identity-service.git", package = "aziot-identity-common", tag = "1.4.1" }
-aziot-identityd-config = { git = "https://git@github.com/Azure/iot-identity-service.git", package = "aziot-identityd-config", tag = "1.4.1" }
-aziot-identity-common-http = { git = "https://git@github.com/Azure/iot-identity-service.git", package = "aziot-identity-common-http", tag = "1.4.1" }
-aziot-keyd-config = { git = "https://git@github.com/Azure/iot-identity-service.git", package = "aziot-keyd-config", tag = "1.4.1" }
-aziot-key-client-async = { git = "https://git@github.com/Azure/iot-identity-service.git", package = "aziot-key-client-async", tag = "1.4.1" }
-aziot-key-common = { git = "https://git@github.com/Azure/iot-identity-service.git", package = "aziot-key-common", tag = "1.4.1" }
-aziot-key-common-http = { git = "https://git@github.com/Azure/iot-identity-service.git", package = "aziot-key-common-http", tag = "1.4.1" }
+aziot-cert-client-async = { git = "https://github.com/Azure/iot-identity-service.git", package = "aziot-cert-client-async", tag = "1.4.1" }
+aziot-cert-common = { git = "https://github.com/Azure/iot-identity-service.git", package = "aziot-cert-common", tag = "1.4.1" }
+aziot-certd-config = { git = "https://github.com/Azure/iot-identity-service.git", package = "aziot-certd-config", tag = "1.4.1" }
+aziot-cert-common-http = { git = "https://github.com/Azure/iot-identity-service.git", package = "aziot-cert-common-http", tag = "1.4.1" }
+aziot-identity-client-async = { git = "https://github.com/Azure/iot-identity-service.git", package = "aziot-identity-client-async", tag = "1.4.1" }
+aziot-identity-common = { git = "https://github.com/Azure/iot-identity-service.git", package = "aziot-identity-common", tag = "1.4.1" }
+aziot-identityd-config = { git = "https://github.com/Azure/iot-identity-service.git", package = "aziot-identityd-config", tag = "1.4.1" }
+aziot-identity-common-http = { git = "https://github.com/Azure/iot-identity-service.git", package = "aziot-identity-common-http", tag = "1.4.1" }
+aziot-keyd-config = { git = "https://github.com/Azure/iot-identity-service.git", package = "aziot-keyd-config", tag = "1.4.1" }
+aziot-key-client-async = { git = "https://github.com/Azure/iot-identity-service.git", package = "aziot-key-client-async", tag = "1.4.1" }
+aziot-key-common = { git = "https://github.com/Azure/iot-identity-service.git", package = "aziot-key-common", tag = "1.4.1" }
+aziot-key-common-http = { git = "https://github.com/Azure/iot-identity-service.git", package = "aziot-key-common-http", tag = "1.4.1" }
 base64 = "0.13"
 env_logger = "0.8"
-http-common = { git = "https://git@github.com/Azure/iot-identity-service.git", package = "http-common", tag = "1.4.1" }
+http-common = { git = "https://github.com/Azure/iot-identity-service.git", package = "http-common", tag = "1.4.1" }
 hyper = "0.14"
 hyper-timeout = "0.4"
 log = "0.4"
@@ -38,7 +38,7 @@ serde = { version = "1", features = ["derive"] }
 http = "0.2"
 futures-util = "0.3"
 serde_json = "1"
-config-common = { git = "https://git@github.com/Azure/iot-identity-service.git", package = "config-common", tag = "1.4.1" }
+config-common = { git = "https://github.com/Azure/iot-identity-service.git", package = "config-common", tag = "1.4.1" }
 toml = "0.5"
 lazy_static = "1.4"
 regex = "1.5"
