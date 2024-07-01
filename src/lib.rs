@@ -1,3 +1,4 @@
+use base64::prelude::*;
 use log::debug;
 use std::time::Duration;
 use std::time::SystemTime;
@@ -176,7 +177,7 @@ async fn build_sas(
         )
         .await?;
     debug!("Signature (hex): {:?}.", signature);
-    let signature = base64::encode(&signature);
+    let signature = BASE64_STANDARD.encode(&signature);
     debug!("Signature (base64): {:?}.", signature);
 
     let token = url::form_urlencoded::Serializer::new(format!("sr={}", resource_uri))

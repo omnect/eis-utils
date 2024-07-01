@@ -277,7 +277,7 @@ async fn start_identity_service(
         }
         Ok(s) => s,
     };
-    let settings: aziot_identityd_config::Settings = serde::Deserialize::deserialize(config)?;
+    let settings: aziot_identityd_config::Settings = serde::Deserialize::deserialize(config).unwrap();
 
     let connector = settings.endpoints.aziot_identityd.clone();
 
@@ -336,7 +336,7 @@ async fn start_key_service() -> Result<(), std::io::Error> {
         }
         Ok(s) => s,
     };
-    let settings: aziot_keyd_config::Config = serde::Deserialize::deserialize(config)?;
+    let settings: aziot_keyd_config::Config = serde::Deserialize::deserialize(config).unwrap();
 
     let connector = settings.endpoints.aziot_keyd.clone();
 
@@ -397,7 +397,7 @@ async fn start_cert_service() -> Result<(), std::io::Error> {
         }
         Ok(s) => s,
     };
-    let settings: aziot_certd_config::Config = serde::Deserialize::deserialize(config)?;
+    let settings: aziot_certd_config::Config = serde::Deserialize::deserialize(config).unwrap();
 
     let connector = settings.endpoints.aziot_certd.clone();
 
