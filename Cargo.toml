@@ -23,7 +23,8 @@ aziot-key-client-async = { git = "https://github.com/Azure/iot-identity-service.
 aziot-key-common = { git = "https://github.com/Azure/iot-identity-service.git", package = "aziot-key-common", tag = "1.5.0" }
 aziot-key-common-http = { git = "https://github.com/Azure/iot-identity-service.git", package = "aziot-key-common-http", tag = "1.5.0" }
 base64 = "0.22"
-env_logger = "0.11"
+# ToDo: check if 'default-features = false' can be removed. currently needed as workaround for cargo-bitbake.
+env_logger = { version = "0.11", default-features = false }
 http-common = { git = "https://github.com/Azure/iot-identity-service.git", package = "http-common", tag = "1.5.0" }
 hyper-timeout = "0.5"
 log = "0.4"
