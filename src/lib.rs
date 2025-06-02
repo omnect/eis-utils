@@ -39,8 +39,7 @@ pub async fn request_connection_string_from_eis_with_expiry(
             .duration_since(std::time::UNIX_EPOCH)
             .unwrap()
     {
-        return Err(std::io::Error::new(
-            std::io::ErrorKind::Other,
+        return Err(std::io::Error::other(
             "Invalid expiry, needs to be in the future.".to_string(),
         ));
     }
@@ -60,8 +59,7 @@ pub async fn request_connection_string_from_eis_with_expiry(
     let spec = match identity {
         aziot_identity_common::Identity::Aziot(i) => i,
         _ => {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
+            return Err(std::io::Error::other(
                 format!("Invalid identity type {:?}.", identity),
             ));
         }
@@ -84,8 +82,7 @@ pub async fn request_connection_string_from_eis_with_expiry(
     let auth = match spec.auth {
         Some(a) => a,
         _ => {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
+            return Err(std::io::Error::other(
                 "Missing auth.".to_string(),
             ));
         }
@@ -93,8 +90,7 @@ pub async fn request_connection_string_from_eis_with_expiry(
     let key = match auth.key_handle {
         Some(k) => k,
         _ => {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
+            return Err(std::io::Error::other(
                 "Missing auth key handle.".to_string(),
             ));
         }
@@ -117,8 +113,7 @@ pub async fn request_connection_string_from_eis_with_expiry(
             let cert_id = match auth.cert_id {
                 Some(c) => c,
                 _ => {
-                    return Err(std::io::Error::new(
-                        std::io::ErrorKind::Other,
+                    return Err(std::io::Error::other(
                         "Missing auth cert id.".to_string(),
                     ));
                 }
@@ -136,8 +131,7 @@ pub async fn request_connection_string_from_eis_with_expiry(
             }
         }
         _ => {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
+            return Err(std::io::Error::other(
                 format!("Invalid auth type {:?}.", auth.auth_type),
             ));
         }
