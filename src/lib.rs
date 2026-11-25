@@ -59,9 +59,10 @@ pub async fn request_connection_string_from_eis_with_expiry(
     let spec = match identity {
         aziot_identity_common::Identity::Aziot(i) => i,
         _ => {
-            return Err(std::io::Error::other(
-                format!("Invalid identity type {:?}.", identity),
-            ));
+            return Err(std::io::Error::other(format!(
+                "Invalid identity type {:?}.",
+                identity
+            )));
         }
     };
 
@@ -82,9 +83,7 @@ pub async fn request_connection_string_from_eis_with_expiry(
     let auth = match spec.auth {
         Some(a) => a,
         _ => {
-            return Err(std::io::Error::other(
-                "Missing auth.".to_string(),
-            ));
+            return Err(std::io::Error::other("Missing auth.".to_string()));
         }
     };
     let key = match auth.key_handle {
@@ -113,9 +112,7 @@ pub async fn request_connection_string_from_eis_with_expiry(
             let cert_id = match auth.cert_id {
                 Some(c) => c,
                 _ => {
-                    return Err(std::io::Error::other(
-                        "Missing auth cert id.".to_string(),
-                    ));
+                    return Err(std::io::Error::other("Missing auth cert id.".to_string()));
                 }
             };
             debug!("Fetching certificate.");
@@ -131,9 +128,10 @@ pub async fn request_connection_string_from_eis_with_expiry(
             }
         }
         _ => {
-            return Err(std::io::Error::other(
-                format!("Invalid auth type {:?}.", auth.auth_type),
-            ));
+            return Err(std::io::Error::other(format!(
+                "Invalid auth type {:?}.",
+                auth.auth_type
+            )));
         }
     }
     Ok(connection_info)
@@ -160,7 +158,7 @@ async fn build_sas(
             .to_string();
     debug!("Uri after encode: {:?}.", resource_uri);
 
-    let sig_data = format!("{}\n{}", &resource_uri, expiry);
+    let sig_data = format!("{}\n{}", resource_uri, expiry);
     debug!("Data to sign: {:?}.", sig_data);
 
     let signature = key_client

@@ -266,18 +266,16 @@ async fn start_identity_service(
     let config_path: std::path::PathBuf = "tests/identity-config.toml".into();
     let config: toml::Value = match config_common::read_config(&config_path, None) {
         Err(e) => {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
-                format!(
-                    "Could not read config {}: {:?}",
-                    config_path.to_string_lossy(),
-                    e
-                ),
-            ));
+            return Err(std::io::Error::other(format!(
+                "Could not read config {}: {:?}",
+                config_path.to_string_lossy(),
+                e
+            )));
         }
         Ok(s) => s,
     };
-    let settings: aziot_identityd_config::Settings = serde::Deserialize::deserialize(config).unwrap();
+    let settings: aziot_identityd_config::Settings =
+        serde::Deserialize::deserialize(config).unwrap();
 
     let connector = settings.endpoints.aziot_identityd.clone();
 
@@ -298,10 +296,10 @@ async fn start_identity_service(
         .await
     {
         Err(e) => {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
-                format!("Could not create incoming connector: {:?}", e),
-            ));
+            return Err(std::io::Error::other(format!(
+                "Could not create incoming connector: {:?}",
+                e
+            )));
         }
         Ok(s) => s,
     };
@@ -325,14 +323,11 @@ async fn start_key_service() -> Result<(), std::io::Error> {
     let config_path: std::path::PathBuf = "tests/key-config.toml".into();
     let config: toml::Value = match config_common::read_config(&config_path, None) {
         Err(e) => {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
-                format!(
-                    "Could not read config {}: {:?}",
-                    config_path.to_string_lossy(),
-                    e
-                ),
-            ));
+            return Err(std::io::Error::other(format!(
+                "Could not read config {}: {:?}",
+                config_path.to_string_lossy(),
+                e
+            )));
         }
         Ok(s) => s,
     };
@@ -341,9 +336,7 @@ async fn start_key_service() -> Result<(), std::io::Error> {
     let connector = settings.endpoints.aziot_keyd.clone();
 
     let api = KeyApi {
-        signature: http_common::ByteString {
-            0: vec![0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08],
-        },
+        signature: http_common::ByteString(vec![0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08]),
     };
     let api = std::sync::Arc::new(futures_util::lock::Mutex::new(api));
     let server = KeyService { api };
@@ -359,10 +352,10 @@ async fn start_key_service() -> Result<(), std::io::Error> {
         .await
     {
         Err(e) => {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
-                format!("Could not create incoming connector: {:?}", e),
-            ));
+            return Err(std::io::Error::other(format!(
+                "Could not create incoming connector: {:?}",
+                e
+            )));
         }
         Ok(s) => s,
     };
@@ -386,14 +379,11 @@ async fn start_cert_service() -> Result<(), std::io::Error> {
     let config_path: std::path::PathBuf = "tests/cert-config.toml".into();
     let config: toml::Value = match config_common::read_config(&config_path, None) {
         Err(e) => {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
-                format!(
-                    "Could not read config {}: {:?}",
-                    config_path.to_string_lossy(),
-                    e
-                ),
-            ));
+            return Err(std::io::Error::other(format!(
+                "Could not read config {}: {:?}",
+                config_path.to_string_lossy(),
+                e
+            )));
         }
         Ok(s) => s,
     };
@@ -402,9 +392,9 @@ async fn start_cert_service() -> Result<(), std::io::Error> {
     let connector = settings.endpoints.aziot_certd.clone();
 
     let api = CertApi {
-        certificate: aziot_cert_common_http::Pem {
-            0: vec![0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08],
-        },
+        certificate: aziot_cert_common_http::Pem(vec![
+            0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08,
+        ]),
         last_cert_id: "INVALID".to_owned(),
     };
     let api = std::sync::Arc::new(futures_util::lock::Mutex::new(api));
@@ -421,10 +411,10 @@ async fn start_cert_service() -> Result<(), std::io::Error> {
         .await
     {
         Err(e) => {
-            return Err(std::io::Error::new(
-                std::io::ErrorKind::Other,
-                format!("Could not create incoming connector: {:?}", e),
-            ));
+            return Err(std::io::Error::other(format!(
+                "Could not create incoming connector: {:?}",
+                e
+            )));
         }
         Ok(s) => s,
     };
@@ -472,7 +462,13 @@ async fn check_request_connection_string_from_eis_with_expiry_with_sas_token() {
         .expect("Success");
     assert!(result.auth_type == eis_utils::AuthType::SASToken);
     assert!(result.conn_type == eis_utils::ConnType::Device);
-    assert_eq!(result.connection_string, format!("HostName=Somehub;DeviceId=SomeDeviceId;SharedAccessSignature=SharedAccessSignature sr=somehub/devices/somedeviceid&sig=AQIDBAUGBwg%3D&se={}", expire.as_secs()));
+    assert_eq!(
+        result.connection_string,
+        format!(
+            "HostName=Somehub;DeviceId=SomeDeviceId;SharedAccessSignature=SharedAccessSignature sr=somehub/devices/somedeviceid&sig=AQIDBAUGBwg%3D&se={}",
+            expire.as_secs()
+        )
+    );
     assert_eq!(result.certificate_string.len(), 0);
     assert_eq!(result.openssl_engine.len(), 0);
     assert_eq!(result.openssl_private_key.len(), 0);
@@ -510,7 +506,7 @@ async fn check_request_connection_string_from_eis_with_expiry_with_cert() {
     assert!(result.conn_type == eis_utils::ConnType::Device);
     assert_eq!(
         result.connection_string,
-        format!("HostName=Somehub;DeviceId=SomeDeviceId;x509=true")
+        "HostName=Somehub;DeviceId=SomeDeviceId;x509=true"
     );
     assert_eq!(result.certificate_string.len(), 8);
     assert_eq!(result.openssl_engine, "aziot_keys");
@@ -549,7 +545,13 @@ async fn check_request_connection_string_from_eis_with_expiry_with_sas_token_and
         .expect("Success");
     assert!(result.auth_type == eis_utils::AuthType::SASToken);
     assert!(result.conn_type == eis_utils::ConnType::Module);
-    assert_eq!(result.connection_string, format!("HostName=Somehub;DeviceId=SomeDeviceId;ModuleId=SomeModuleId;SharedAccessSignature=SharedAccessSignature sr=somehub/devices/somedeviceid/modules/somemoduleid&sig=AQIDBAUGBwg%3D&se={}", expire.as_secs()));
+    assert_eq!(
+        result.connection_string,
+        format!(
+            "HostName=Somehub;DeviceId=SomeDeviceId;ModuleId=SomeModuleId;SharedAccessSignature=SharedAccessSignature sr=somehub/devices/somedeviceid/modules/somemoduleid&sig=AQIDBAUGBwg%3D&se={}",
+            expire.as_secs()
+        )
+    );
     assert_eq!(result.certificate_string.len(), 0);
     assert_eq!(result.openssl_engine.len(), 0);
     assert_eq!(result.openssl_private_key.len(), 0);
@@ -587,7 +589,7 @@ async fn check_request_connection_string_from_eis_with_expiry_with_cert_and_mod(
     assert!(result.conn_type == eis_utils::ConnType::Module);
     assert_eq!(
         result.connection_string,
-        format!("HostName=Somehub;DeviceId=SomeDeviceId;ModuleId=SomeModuleId;x509=true")
+        "HostName=Somehub;DeviceId=SomeDeviceId;ModuleId=SomeModuleId;x509=true"
     );
     assert_eq!(result.certificate_string.len(), 8);
     assert_eq!(result.openssl_engine, "aziot_keys");
